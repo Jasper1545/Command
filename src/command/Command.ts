@@ -33,20 +33,26 @@ class WalkCommand implements Command {
 class FightCommand implements Command {
 
     private currentMonster:Monster;
+    private currentHero:Hero;
+    private battleService:BattleService;
 
     constructor(monster:Monster) {
         this.currentMonster = monster;
+        this.currentHero = User.getHero();
+        this.battleService = new BattleService(this.currentHero,this.currentMonster);
     }
 
     execute(callback: Function): void {
         console.log("开始战斗");
-        this.currentMonster.startFight(callback);
+        this.battleService.startBattle(callback);
+        //this.currentMonster.startFight(callback);
         
     }
 
     cancel(callback: Function) {
-        console.log("脱离战斗")
-        this.currentMonster.stopFight(callback);
+        console.log("脱离战斗");
+        this.battleService.stopBattle(callback);
+        //this.currentMonster.stopFight(callback);
 
     }
 }

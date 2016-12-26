@@ -66,8 +66,34 @@ var Hero = (function () {
         this.isInTeam = false;
         this.equipments = [];
         this.property = new HeroProperty(heroConfig[type].id, heroConfig[type].name, heroConfig[type].attack, heroConfig[type].strength, heroConfig[type].agility, heroConfig[type].intelligence, heroConfig[type].endurance);
+        this.reSetCurrentHMp();
     }
     var d = __define,c=Hero,p=c.prototype;
+    p.reSetCurrentHMp = function () {
+        this.currentHp = this.maxHp;
+        this.currentMp = this.maxMp;
+    };
+    p.reviveHero = function () {
+        console.log("玩家复活");
+        this.reSetCurrentHMp();
+    };
+    p.giveDamage = function () {
+        return this.attack;
+    };
+    p.getDamage = function (damage) {
+        console.log("英雄受伤害:" + damage);
+        this.currentHp -= damage;
+    };
+    p.getHp = function () {
+        return this.currentHp;
+    };
+    p.getMp = function () {
+        return this.currentMp;
+    };
+    p.levelUp = function () {
+        this.property.levelup;
+        this.reSetCurrentHMp();
+    };
     p.setInTeam = function (status) {
         this.isInTeam = status;
     };

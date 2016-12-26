@@ -171,11 +171,14 @@ class Main extends egret.DisplayObjectContainer {
         panel.equipmentMap.equip(shield1);
         panel.equipmentMap.equip(head1);
 
+        hero1.reSetCurrentHMp();
         hero1.setInTeam(true);
         
         var user = new User();
-
         user.addHero(hero1);
+        User.setHero(hero1);
+
+        HeroPanel.setHeroPanel(panel);
         panel.setHero(hero1);
 
         infoScence.addChild(panel);

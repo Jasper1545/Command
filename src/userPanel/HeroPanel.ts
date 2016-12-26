@@ -190,8 +190,10 @@ var heroTextConfig = [
 	{name:"  endurance:  ",x:0,y:300},
 	{name:"  fightPower:  ",x:0,y:350},
 
-	{name:"  HP:  ",x:200,y:100},
-	{name:"  MP:  ",x:200,y:150}
+	{name:"  MAXHP:  ",x:200,y:50},
+	{name:"  MAXMP:  ",x:200,y:100},
+	{name:"  HP:  ",x:200,y:150},
+	{name:"  MP:  ",x:200,y:200}
 
 ]
 
@@ -204,6 +206,9 @@ class HeroInfoPanel extends egret.DisplayObjectContainer{
 	maxHp_Textfield:egret.TextField;
 	maxMp_Textfield:egret.TextField;
 
+	hp_Textfield:egret.TextField;
+	mp_Textfield:egret.TextField;
+
 	attack_Textfield:egret.TextField;
 	strength_Textfield:egret.TextField;
 	agility_Textfield:egret.TextField;
@@ -214,7 +219,7 @@ class HeroInfoPanel extends egret.DisplayObjectContainer{
 
 	public constructor() {
 		super();
-		this.backpanel = new Panel(0,0,400,400);
+		this.backpanel = new Panel(0,0,448,448);
 		this.addChild(this.backpanel);
 		this.init();
 
@@ -277,10 +282,19 @@ class HeroInfoPanel extends egret.DisplayObjectContainer{
 		this.maxMp_Textfield.y = heroTextConfig[8].y;
 		this.addChild(this.maxMp_Textfield);
 		
+		this.hp_Textfield = new egret.TextField();
+		this.hp_Textfield.text = heroTextConfig[9].name;
+		this.hp_Textfield.x = heroTextConfig[9].x;
+		this.hp_Textfield.y = heroTextConfig[9].y;
+		this.addChild(this.hp_Textfield);
+
+		this.mp_Textfield = new egret.TextField();
+		this.mp_Textfield.text = heroTextConfig[10].name;
+		this.mp_Textfield.x = heroTextConfig[10].x;
+		this.mp_Textfield.y = heroTextConfig[10].y;
+		this.addChild(this.mp_Textfield);
 		
 	}
-
-
 
 	public setPanelText(hero:Hero) {
 
@@ -295,12 +309,16 @@ class HeroInfoPanel extends egret.DisplayObjectContainer{
 		this.maxHp_Textfield.text = heroTextConfig[7].name + hero.maxHp;
 		this.maxMp_Textfield.text = heroTextConfig[8].name + hero.maxMp;
 
+		this.hp_Textfield.text = heroTextConfig[9].name + hero.getHp();
+		this.mp_Textfield.text = heroTextConfig[10].name + hero.getMp();
+
 	}
 
 }
 
 class HeroPanel extends egret.DisplayObjectContainer{
 	
+	public static heroPanel:HeroPanel;
 	equipmentMap:EquipmentMap;
 	heroMap:HeroMap;
 	equipmentPanel:EquipmentPanel;
@@ -319,6 +337,14 @@ class HeroPanel extends egret.DisplayObjectContainer{
 		this.heroInfoPanel.y = 600;
 		this.addChild(this.heroInfoPanel);
 		
+	}
+
+	public static setHeroPanel(panel:HeroPanel) {
+		this.heroPanel = panel;
+	}
+
+	public static getHeroPanel():HeroPanel {
+		return this.heroPanel;
 	}
 
 	showPanel(equipment:Equipment){

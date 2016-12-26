@@ -67,6 +67,9 @@ class HeroProperty {
 
 class Hero {
 
+	private currentHp:number;
+	private currentMp:number;
+
 	dirtyFlag:boolean = true;
 	property:HeroProperty;
 	isInTeam:boolean = false;
@@ -76,6 +79,39 @@ class Hero {
 		this.property = new HeroProperty(heroConfig[type].id,heroConfig[type].name,heroConfig[type].attack,heroConfig[type].strength,
 									 heroConfig[type].agility,heroConfig[type].intelligence,
 									 heroConfig[type].endurance);
+		this.reSetCurrentHMp();
+	}
+
+	public reSetCurrentHMp(){
+		this.currentHp = this.maxHp;
+		this.currentMp = this.maxMp;
+	}
+
+	public reviveHero(){
+		console.log("玩家复活");
+		this.reSetCurrentHMp();
+	}
+
+	public giveDamage():number {
+		return this.attack;
+	}
+
+	public getDamage(damage:number) {
+		console.log("英雄受伤害:"+ damage);
+		this.currentHp -= damage;
+	}
+
+	public getHp():number {
+		return this.currentHp;
+	}
+
+	public getMp():number {
+		return this.currentMp;
+	}
+
+	public levelUp() {
+		this.property.levelup;
+		this.reSetCurrentHMp();
 	}
 
 	public setInTeam(status:boolean):void {

@@ -120,14 +120,16 @@ var heroTextConfig = [
     { name: "  intelligence:  ", x: 0, y: 250 },
     { name: "  endurance:  ", x: 0, y: 300 },
     { name: "  fightPower:  ", x: 0, y: 350 },
-    { name: "  HP:  ", x: 200, y: 100 },
-    { name: "  MP:  ", x: 200, y: 150 }
+    { name: "  MAXHP:  ", x: 200, y: 50 },
+    { name: "  MAXMP:  ", x: 200, y: 100 },
+    { name: "  HP:  ", x: 200, y: 150 },
+    { name: "  MP:  ", x: 200, y: 200 }
 ];
 var HeroInfoPanel = (function (_super) {
     __extends(HeroInfoPanel, _super);
     function HeroInfoPanel() {
         _super.call(this);
-        this.backpanel = new Panel(0, 0, 400, 400);
+        this.backpanel = new Panel(0, 0, 448, 448);
         this.addChild(this.backpanel);
         this.init();
     }
@@ -178,6 +180,16 @@ var HeroInfoPanel = (function (_super) {
         this.maxMp_Textfield.x = heroTextConfig[8].x;
         this.maxMp_Textfield.y = heroTextConfig[8].y;
         this.addChild(this.maxMp_Textfield);
+        this.hp_Textfield = new egret.TextField();
+        this.hp_Textfield.text = heroTextConfig[9].name;
+        this.hp_Textfield.x = heroTextConfig[9].x;
+        this.hp_Textfield.y = heroTextConfig[9].y;
+        this.addChild(this.hp_Textfield);
+        this.mp_Textfield = new egret.TextField();
+        this.mp_Textfield.text = heroTextConfig[10].name;
+        this.mp_Textfield.x = heroTextConfig[10].x;
+        this.mp_Textfield.y = heroTextConfig[10].y;
+        this.addChild(this.mp_Textfield);
     };
     p.setPanelText = function (hero) {
         this.name_Texfield.text = heroTextConfig[0].name + hero.property.name;
@@ -189,6 +201,8 @@ var HeroInfoPanel = (function (_super) {
         this.fightPower_Textfield.text = heroTextConfig[6].name + hero.fightPower;
         this.maxHp_Textfield.text = heroTextConfig[7].name + hero.maxHp;
         this.maxMp_Textfield.text = heroTextConfig[8].name + hero.maxMp;
+        this.hp_Textfield.text = heroTextConfig[9].name + hero.getHp();
+        this.mp_Textfield.text = heroTextConfig[10].name + hero.getMp();
     };
     return HeroInfoPanel;
 }(egret.DisplayObjectContainer));
@@ -207,6 +221,12 @@ var HeroPanel = (function (_super) {
         this.addChild(this.heroInfoPanel);
     }
     var d = __define,c=HeroPanel,p=c.prototype;
+    HeroPanel.setHeroPanel = function (panel) {
+        this.heroPanel = panel;
+    };
+    HeroPanel.getHeroPanel = function () {
+        return this.heroPanel;
+    };
     p.showPanel = function (equipment) {
         this.equipmentPanel.setPanel(equipment);
         this.addChild(this.equipmentPanel);

@@ -1,10 +1,19 @@
 class User {
 
+    public static hero:Hero;
 	heros:Hero[] = [];
     herointeam:Hero[] = [];
 
 	public constructor() {
 	}
+
+    public static setHero(hero:Hero){
+        this.hero = hero;
+    }
+
+    public static getHero():Hero{
+        return this.hero;
+    }
 
 	public addHero(hero:Hero):void {
 		this.heros.push(hero);

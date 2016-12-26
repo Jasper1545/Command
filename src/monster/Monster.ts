@@ -1,12 +1,12 @@
 var monsterConfig = [
 
-	{monsterId:"001",name:"monster1",x:512,y:256,bitMap:"player01_idle_down_png",monsterFightPosX:512,monsterFightPosY:320}
+	{monsterId:"001",name:"monster1",x:512,y:256,bitMap:"player01_idle_down_png",hp:5000,atk:100,monsterFightPosX:512,monsterFightPosY:320}
 
 ]
 
 class Monster {
 
-	public static _currrntMonstrt:Monster;
+	public static _currrntMonster:Monster;
 	callback:Function;
 	__hasBeenCancelled:boolean = false;
 	fullProcess:number = 10;
@@ -16,6 +16,9 @@ class Monster {
 	monsterId:string;
 	monsterFightPosX:number;
 	monsterFightPosY:number;
+	maxHp:number;
+	currentHp:number;
+	atk:number;
 
 	public constructor(monsterId:string,service:SceneService) {
 		this.scenceService = service;
@@ -33,9 +36,35 @@ class Monster {
 				this.monsterFightPosX = monsterConfig[i].monsterFightPosX;
 				this.monsterFightPosY = monsterConfig[i].monsterFightPosY;
 
+				this.currentHp = monsterConfig[i].hp;
+				this.maxHp = monsterConfig[i].hp;
+				this.atk = monsterConfig[i].atk;
+
 			}
 		}
 
+	}
+
+	public refurbishMonster() {
+		console.log("怪物刷新");
+		this.currentHp = this.maxHp;
+	}
+
+	public giveDamage():number {
+		return this.atk;
+	}
+
+	public getDamage(damage:number) {
+		console.log("怪物受伤害:"+ damage);
+		this.currentHp -= damage;
+	}
+
+	public getHp():number {
+		return this.currentHp;
+	}
+
+	public getMaxHp():number {
+		return this.maxHp;
 	}
 
 	public setMonsterPos(x:number,y:number) {
@@ -44,11 +73,11 @@ class Monster {
 	}
 
 	public static setCurrentMonster(monster:Monster) {
-		this._currrntMonstrt = monster;
+		this._currrntMonster = monster;
 	}
 
 	public static getCurrentMonster():Monster {
-		return this._currrntMonstrt;
+		return this._currrntMonster;
 	}	
 
 	public showMonster(stage:egret.DisplayObjectContainer) {
@@ -59,53 +88,6 @@ class Monster {
 	public offShowMonster(stage:egret.DisplayObjectContainer) {
 		stage.removeChild(this.monster);
 		
-	}
-
-	public startFight(callback:Function) {
-		this.callback = callback;
-		console.log("战斗开始");
-		this.fighting();
-
-	}
-
-	public stopFight(callback:Function) {
-		this.callback = callback;
-		console.log("取消战斗");
-		this.__hasBeenCancelled = true;
-	}
-
-	private fighting() {
-		egret.setTimeout(this.checkProcess,this,200);
-	}
-
-	private checkProcess() {
-		if(this.__hasBeenCancelled){
-			this.cancalFight();
-
-		}else {
-			this.currentProcess++;
-			console.log("战斗进度：" + this.currentProcess + "/" + this.fullProcess);
-
-			if(this.currentProcess == this.fullProcess){
-				this.fightEnd();
-			}else {
-				egret.setTimeout(this.checkProcess,this,200);
-			}
-		}
-	}
-
-	private fightEnd() {
-		
-		console.log("战斗结束");
-		this.scenceService.notify(this.monsterId);
-		this.currentProcess = 0;
-		this.callback();
-	}
-
-	public cancalFight() {
-		console.log("战斗取消");
-		this.__hasBeenCancelled = false;
-		this.callback();
 	}
 
 }

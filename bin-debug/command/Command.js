@@ -22,15 +22,19 @@ egret.registerClass(WalkCommand,'WalkCommand',["Command"]);
 var FightCommand = (function () {
     function FightCommand(monster) {
         this.currentMonster = monster;
+        this.currentHero = User.getHero();
+        this.battleService = new BattleService(this.currentHero, this.currentMonster);
     }
     var d = __define,c=FightCommand,p=c.prototype;
     p.execute = function (callback) {
         console.log("开始战斗");
-        this.currentMonster.startFight(callback);
+        this.battleService.startBattle(callback);
+        //this.currentMonster.startFight(callback);
     };
     p.cancel = function (callback) {
         console.log("脱离战斗");
-        this.currentMonster.stopFight(callback);
+        this.battleService.stopBattle(callback);
+        //this.currentMonster.stopFight(callback);
     };
     return FightCommand;
 }());

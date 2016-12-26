@@ -4,6 +4,12 @@ var User = (function () {
         this.herointeam = [];
     }
     var d = __define,c=User,p=c.prototype;
+    User.setHero = function (hero) {
+        this.hero = hero;
+    };
+    User.getHero = function () {
+        return this.hero;
+    };
     p.addHero = function (hero) {
         this.heros.push(hero);
     };

@@ -103,6 +103,10 @@ class CommandService {
 	public changeToInfoScence(e:egret.TextEvent){
 		this.stage.removeChild(this.gameScence);
 		this.stage.removeChild(this.changeToInfoButton);
+		
+		var panel = HeroPanel.getHeroPanel();
+		panel.setHero(User.getHero());
+		
 		this.stage.addChild(this.infoScence);
 		this.stage.addChild(this.changeToGameButton);
 		

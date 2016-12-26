@@ -122,9 +122,12 @@ var Main = (function (_super) {
         panel.equipmentMap.equip(sword1);
         panel.equipmentMap.equip(shield1);
         panel.equipmentMap.equip(head1);
+        hero1.reSetCurrentHMp();
         hero1.setInTeam(true);
         var user = new User();
         user.addHero(hero1);
+        User.setHero(hero1);
+        HeroPanel.setHeroPanel(panel);
         panel.setHero(hero1);
         infoScence.addChild(panel);
         //人物面板结束
