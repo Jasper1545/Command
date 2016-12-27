@@ -1,7 +1,17 @@
-var Equipment = (function () {
-    function Equipment() {
+var characterTypeConfig = {
+    HERO: 0
+};
+var CharacterStatusConfig = {
+    NORMAL: 0,
+    DEAD: 1
+};
+var Character = (function (_super) {
+    __extends(Character, _super);
+    function Character() {
+        _super.call(this);
+        this.status = CharacterStatusConfig.NORMAL;
     }
-    var d = __define,c=Equipment,p=c.prototype;
+    var d = __define,c=Character,p=c.prototype;
     d(p, "fightPower"
         ,function () {
             return 0;
@@ -9,6 +19,11 @@ var Equipment = (function () {
     );
     ;
     d(p, "attack"
+        ,function () {
+            return 0;
+        }
+    );
+    d(p, "defence"
         ,function () {
             return 0;
         }
@@ -37,7 +52,7 @@ var Equipment = (function () {
         }
     );
     ;
-    return Equipment;
-}());
-egret.registerClass(Equipment,'Equipment');
-//# sourceMappingURL=Equipment.js.map
+    return Character;
+}(Property));
+egret.registerClass(Character,'Character');
+//# sourceMappingURL=Character.js.map

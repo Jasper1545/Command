@@ -105,16 +105,16 @@ var Main = (function (_super) {
         monster.showMonster(this.map);
         //任务和NPC和怪物结束
         //人物面板部分
-        var gem1 = new Gem(0);
-        var gem2 = new Gem(1);
-        var gem3 = new Gem(2);
-        var sword1 = new Weapon(0);
-        var shield1 = new Shield(0);
-        var head1 = new Head(0);
+        var gem1 = new Gem("gem_0");
+        var gem2 = new Gem("gem_1");
+        var gem3 = new Gem("gem_2");
+        var sword1 = new Weapon("weapon_0");
+        var shield1 = new Shield("shield_0");
+        var head1 = new Head("head_0");
         sword1.addGem(gem1);
         shield1.addGem(gem2);
         head1.addGem(gem3);
-        var hero1 = new Hero(0);
+        var hero1 = new Hero("hero_0");
         var panel = new HeroPanel();
         hero1.equip(sword1);
         hero1.equip(shield1);

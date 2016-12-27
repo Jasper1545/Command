@@ -1,11 +1,3 @@
-var equipmentType = {
-    WEAPON: 0,
-    SHIELD: 1,
-    HEAD: 2,
-    NECK: 3,
-    SHOULDER: 4,
-    BODY: 5
-};
 var HeroBackMapConfig = [
     { image: "hero_png", x: 0, y: 0 }
 ];
@@ -66,12 +58,12 @@ var EquipmentMap = (function () {
     p.equip = function (equipment) {
         var image; //equipment.property.configId
         for (var i = 0; i < equipmentMapConfig.length; i++) {
-            if (equipmentMapConfig[i].configId == equipment.property.configId) {
+            if (equipmentMapConfig[i].configId == equipment.configId) {
                 image = equipmentMapConfig[i].image;
                 break;
             }
         }
-        switch (equipment.property.type) {
+        switch (equipment.type) {
             case equipmentType.HEAD:
                 this.head.texture = RES.getRes(image);
                 break;
@@ -247,7 +239,7 @@ var HeroPanel = (function (_super) {
         console.log("weapon");
         var weapon;
         for (var i = 0; i < this.hero.equipments.length; i++) {
-            if (this.hero.equipments[i].property.type == equipmentType.WEAPON) {
+            if (this.hero.equipments[i].type == equipmentType.WEAPON) {
                 weapon = this.hero.equipments[i];
             }
         }
@@ -261,7 +253,7 @@ var HeroPanel = (function (_super) {
         console.log("shield");
         var shield;
         for (var i = 0; i < this.hero.equipments.length; i++) {
-            if (this.hero.equipments[i].property.type == equipmentType.SHIELD) {
+            if (this.hero.equipments[i].type == equipmentType.SHIELD) {
                 shield = this.hero.equipments[i];
             }
         }
@@ -275,7 +267,7 @@ var HeroPanel = (function (_super) {
         console.log("head");
         var head;
         for (var i = 0; i < this.hero.equipments.length; i++) {
-            if (this.hero.equipments[i].property.type == equipmentType.HEAD) {
+            if (this.hero.equipments[i].type == equipmentType.HEAD) {
                 head = this.hero.equipments[i];
             }
         }

@@ -50,7 +50,6 @@ var BattleService = (function () {
             case battleConfig.WIN:
                 console.log("战斗胜利");
                 this.monster.scenceService.notify(this.monster.monsterId);
-                console.log("this.monster.monsterId");
                 this.monster.refurbishMonster();
                 this.callback();
                 break;

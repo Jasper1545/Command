@@ -130,7 +130,7 @@ class EquipmentPanel extends egret.DisplayObjectContainer{
 
 	public setPanel(equipment:Equipment) {
 		this.setPanelText(equipment);
-		this.setPanelPos(equipment.property.type);
+		this.setPanelPos(equipment.type);
 	}
 
 	public setPanelText(equipment:Equipment) {

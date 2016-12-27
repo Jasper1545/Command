@@ -89,7 +89,7 @@ var EquipmentPanel = (function (_super) {
     };
     p.setPanel = function (equipment) {
         this.setPanelText(equipment);
-        this.setPanelPos(equipment.property.type);
+        this.setPanelPos(equipment.type);
     };
     p.setPanelText = function (equipment) {
         this.name_Texfield.text = equipmentTextConfig[0].name + equipment.property.name;
